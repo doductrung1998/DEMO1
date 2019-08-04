@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons>
+      <ion-back-button defaultHref ="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Patient</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <div class="bbt">
+        <ion-button color="dark" class="btn btn-lg btn-white" [class.active]="filterBy===null" (click)="filterBy=null">All</ion-button>
+        <ion-button color="dark" class="btn btn-lg btn-white" [class.active]="filterBy===true" (click)="filterBy=true">Open</ion-button>
+        <ion-button color="dark" class="btn btn-lg btn-white" [class.active]="filterBy===false" (click)="filterBy=false">Closed</ion-button>
+    </div>
+  <ion-grid>
+    <ion-row *ngFor="let patientt of (PATIENTS$ | patientFilter: filterBy)"  >
+      <ion-col size="1" class="alignCenter" routerLink = "/detail/{{patientt.id}}">
+          {{patientt.userId}}
+      </ion-col>
+      <ion-col size="1" class="alignCenter" routerLink = "/detail/{{patientt.id}}">
+          {{patientt.id}}
+      </ion-col>
+      <ion-col size="5.9" class="alignCenter" routerLink = "/detail/{{patientt.id}}">
+          <ion-icon name="home"></ion-icon>
+            {{patientt.title}}
+      </ion-col>
+      <ion-col size="1.5" routerLink = "/detail/{{patientt.id}}">
+          {{patientt.completed}}
+      </ion-col>
+      <ion-col size="2.6" *ngIf="checkTF(patientt); else notShow">
+          <ion-button color="dark" size="small" class="outcome" (click)="changOption(patientt)">OutCome</ion-button>
+      </ion-col>
+      <ng-template #notShow>
+          <ion-col size="2.6">
+                  <ion-select name = "OPP"  [(ngModel)] = "patientt.completed" (change)="changOption1($event,patientt)">
+                          <ion-select-option value=true >Open</ion-select-option>
+                          <ion-select-option value=false >Closed</ion-select-option>
+                  </ion-select>                    
+          </ion-col>
+      </ng-template>
+    </ion-row>
+  </ion-grid>
+</ion-content>

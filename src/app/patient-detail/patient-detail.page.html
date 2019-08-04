@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="dark">
+      <ion-buttons>
+          <ion-back-button defaultHref ="/patient"></ion-back-button>
+      </ion-buttons>
+    <ion-title>{{patientt.userID | uppercase}} Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid *ngIf="patientt">
+        <ion-row>
+            <ion-col>Day: {{patientt.userId}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>Time: {{patientt.id}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>Address: {{patientt.title}}</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>Status: {{patientt.completed}}</ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
